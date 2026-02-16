@@ -11,16 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Install dependencies
-        run: npm install
+      - run: npm install
+
+      # 🔧 Fix permission issue
+      - name: Fix Jest permission
+        run: chmod +x node_modules/.bin/jest
 
       - name: Run tests
         run: npx jest
